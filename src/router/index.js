@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login.vue'
 import Home from '@/components/Home.vue'
+import Welcome from '@/components/Welcome.vue'
 
 Vue.use(Router)
 
@@ -12,7 +13,14 @@ const router = new Router({
       redirect: '/login'
     },
     {path: '/login', component: Login},
-    {path: '/home', component: Home}    
+    {
+      path: '/home',
+      component: Home,
+      redirect: '/welcome', //只要进入了home页面in,立即重定向到welcome页面
+      children:[
+        {path:'/welcome',component:Welcome}
+      ]
+    }    
   ]
 })
 router.beforeEach((to,from,next) =>{
